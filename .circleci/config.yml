@@ -35,10 +35,10 @@ jobs:
         - v1-dependencies-{{ checksum "web/package.json" }}
         - v1-dependencies-
 
-    - run: yarn install
+    - run: cd web && yarn install
     - save_cache:
         paths:
-        - node_modules
+        - web/node_modules
         key: v1-dependencies-{{ checksum "web/package.json" }}
     - run: cd web && yarn test
 
