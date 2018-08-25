@@ -56,10 +56,12 @@ jobs:
         - ~/.gradle
         key: v1-dependencies-{{ checksum "api/build.gradle" }}
     - run: ./gradlew assemble
+    - run: mkdir -p /tmp/workspace/api
+    - run: mv api/build/libs/ /tmp/workspace/api
     - persist_to_workspace:
-        root: api/build/libs
+        root: /tmp/workspace
         paths:
-        - api*.jar
+        - api
 
 
   build-web:
@@ -80,10 +82,12 @@ jobs:
         - web/node_modules
         key: v1-dependencies-{{ checksum "web/package.json" }}
     - run: cd web && yarn build
+    - run: mkdir -p /tmp/workspace/web
+    - run: mv web/build /tmp/workspace/web
     - persist_to_workspace:
-        root: web
+        root: /tmp/workspace
         paths:
-        - build
+        - web
 
   deploy:
     docker:
@@ -94,15 +98,8 @@ jobs:
     steps:
     - checkout
     - attach_workspace:
-        at: .
-    - run: |
-        if [ ! -f api/build/libs/api-0.0.1-SNAPSHOT.jar ]; then
-          echo "API not found";
-        fi
-
-        if [ ! -f web/build/index.html ]; then
-          echo "index not found";
-        fi
+        at: /tmp/workspace
+    - run: ls /tmp/workspace
 
 workflows:
   version: 2
@@ -123,5 +120,5 @@ workflows:
 
     - deploy:
         requires:
-          - build-api
-          - build-web
+        - build-api
+        - build-web
