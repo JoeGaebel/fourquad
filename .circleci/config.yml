@@ -10,14 +10,14 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - v3-dependencies-{{ checksum "api/build.gradle" }}
-        - v3-dependencies-
+        - v3-api-deps-{{ checksum "api/build.gradle" }}
+        - v3-api-deps-
     - run: ./gradlew dependencies
     - run: ./gradlew test
     - save_cache:
         paths:
         - ~/.gradle
-        key: v3-dependencies-{{ checksum "api/build.gradle" }}
+        key: v3-api-deps-{{ checksum "api/build.gradle" }}
 
   test-web:
     docker:
@@ -28,14 +28,14 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - v3-dependencies-{{ checksum "web/package.json" }}
-        - v3-dependencies-
+        - v3-web-deps-{{ checksum "web/package.json" }}
+        - v3-web-deps-
 
     - run: cd web && yarn install
     - save_cache:
         paths:
         - web/node_modules
-        key: v3-dependencies-{{ checksum "web/package.json" }}
+        key: v3-web-deps-{{ checksum "web/package.json" }}
     - run: cd web && yarn test
 
   build-api:
@@ -48,8 +48,8 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - v3-dependencies-{{ checksum "api/build.gradle" }}
-        - v3-dependencies-
+        - v3-api-deps-{{ checksum "api/build.gradle" }}
+        - v3-api-deps-
     - run: ./gradlew dependencies
     - run: ./gradlew assemble
     - run: mkdir -p /tmp/workspace/api
@@ -61,7 +61,7 @@ jobs:
     - save_cache:
         paths:
         - ~/.gradle
-        key: v3-dependencies-{{ checksum "api/build.gradle" }}
+        key: v3-api-deps-{{ checksum "api/build.gradle" }}
 
 
   build-web:
@@ -73,14 +73,14 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - v3-dependencies-{{ checksum "web/package.json" }}
-        - v3-dependencies-
+        - v3-web-deps-{{ checksum "web/package.json" }}
+        - v3-web-deps-
 
     - run: cd web && yarn install
     - save_cache:
         paths:
         - web/node_modules
-        key: v3-dependencies-{{ checksum "web/package.json" }}
+        key: v3-web-deps-{{ checksum "web/package.json" }}
     - run: cd web && yarn build
     - run: mkdir -p /tmp/workspace/web
     - run: mv -v web/build/* /tmp/workspace/web
