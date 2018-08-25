@@ -99,7 +99,12 @@ jobs:
     - checkout
     - attach_workspace:
         at: /tmp/workspace
-    - run: ls /tmp/workspace
+    - run: mv /tmp/workspace/api/ ~/repo/api/build/libs
+    - run: ls ~/repo/api/build/libs
+
+    - run: mv /tmp/workspace/web/ ~/repo/web/build
+    - run: ls ~/repo/web/build
+
 
 workflows:
   version: 2
