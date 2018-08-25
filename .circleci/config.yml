@@ -57,7 +57,7 @@ jobs:
         key: v2-dependencies-{{ checksum "api/build.gradle" }}
     - run: ./gradlew assemble
     - run: mkdir -p /tmp/workspace/api
-    - run: mv api/build/libs/ /tmp/workspace/api
+    - run: mv api/build/libs/* /tmp/workspace/api
     - persist_to_workspace:
         root: /tmp/workspace
         paths:
@@ -83,7 +83,7 @@ jobs:
         key: v2-dependencies-{{ checksum "web/package.json" }}
     - run: cd web && yarn build
     - run: mkdir -p /tmp/workspace/web
-    - run: mv web/build /tmp/workspace/web
+    - run: mv web/build/* /tmp/workspace/web
     - persist_to_workspace:
         root: /tmp/workspace
         paths:
@@ -99,10 +99,10 @@ jobs:
     - checkout
     - attach_workspace:
         at: /tmp/workspace
-    - run: mv /tmp/workspace/api/ ~/repo/api/build/libs
+    - run: mv /tmp/workspace/api/* ~/repo/api/build/libs
     - run: ls ~/repo/api/build/libs
 
-    - run: mv /tmp/workspace/web/ ~/repo/web/build
+    - run: mv /tmp/workspace/web/* ~/repo/web/build
     - run: ls ~/repo/web/build
 
 
