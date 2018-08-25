@@ -99,7 +99,7 @@ jobs:
     - checkout
     - attach_workspace:
         at: /tmp/workspace
-    - run: mv -v /tmp/workspace/api/* ~/repo/api/build/libs
+    - run: mv /tmp/workspace/api/api-0.0.1-SNAPSHOT.jar ~/repo/api/build/libs/api-0.0.1-SNAPSHOT.jar
     - run: ls ~/repo/api/build/libs
     - run: mkdir -p ~/repo/web/build
     - run: mv -v /tmp/workspace/web/* ~/repo/web/build
