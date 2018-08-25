@@ -99,11 +99,14 @@ jobs:
     - checkout
     - attach_workspace:
         at: /tmp/workspace
-    - run: mkdir -p ~/repo/api/build/libs
-    - run: mv /tmp/workspace/api/api-0.0.1-SNAPSHOT.jar ~/repo/api/build/libs/api-0.0.1-SNAPSHOT.jar
 
-    - run: mkdir -p ~/repo/web/build
-    - run: mv -v /tmp/workspace/web/* ~/repo/web/build
+    - run:
+        name: Move the artifacts
+        command: |
+          mkdir -p ~/repo/api/build/libs
+          mv /tmp/workspace/api/api-0.0.1-SNAPSHOT.jar ~/repo/api/build/libs/api-0.0.1-SNAPSHOT.jar
+          mkdir -p ~/repo/web/build
+          mv -v /tmp/workspace/web/* ~/repo/web/build
 
     - run:
         name: Setup CF CLI
@@ -130,7 +133,5 @@ workflows:
 
     - deploy:
         requires:
-        - test-api
-        - test-web
         - build-api
         - build-web
