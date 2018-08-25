@@ -120,3 +120,8 @@ workflows:
         requires:
         - test-api
         - test-web
+
+    - deploy:
+        requires:
+          - build-api
+          - build-web
