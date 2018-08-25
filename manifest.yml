@@ -5,9 +5,12 @@ applications:
   instances: 1
   path: api/build/libs/api-0.0.1-SNAPSHOT.jar
   buildpack: java_buildpack
-
+  routes:
+  - route: fourquad.cfapps.io/api
 - name: fourquad-web
   memory: 128M
   instances: 1
   path: web/build
   buildpack: staticfile_buildpack
+  routes:
+  - route: fourquad.cfapps.io/
