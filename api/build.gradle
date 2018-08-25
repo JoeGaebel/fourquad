@@ -39,10 +39,6 @@ repositories {
     mavenCentral()
 }
 
-bootRun {
-    jvmArgs = ['-Xmx512M']
-}
-
 ext {
     springCloudVersion = 'Finchley.SR1'
 }
