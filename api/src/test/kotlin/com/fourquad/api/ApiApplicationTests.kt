@@ -28,6 +28,6 @@ class ApiApplicationTests {
     fun `hitting page content works`() {
         mockMvc.perform(get("/content"))
                 .andExpect(status().isOk)
-                .andExpect(content().json("""{text: "SICK"}"""))
+                .andExpect(content().json("""{text: "But even more SICK"}"""))
     }
 }

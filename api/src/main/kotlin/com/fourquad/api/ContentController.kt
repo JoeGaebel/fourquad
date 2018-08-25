@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController
 class ContentController {
     @GetMapping("/content")
     fun getContent() : Content {
-        return Content("SICK")
+        return Content("But even more SICK")
     }
 }
 
