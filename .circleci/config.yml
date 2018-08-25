@@ -115,14 +115,14 @@ workflows:
     - build-api:
         requires:
         - test-api
-        - test-web
 
     - build-web:
         requires:
-        - test-api
         - test-web
 
     - deploy:
         requires:
+        - test-api
+        - test-web
         - build-api
         - build-web
