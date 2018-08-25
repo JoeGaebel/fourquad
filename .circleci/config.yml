@@ -101,7 +101,7 @@ jobs:
         at: /tmp/workspace
     - run: mv -v /tmp/workspace/api/* ~/repo/api/build/libs
     - run: ls ~/repo/api/build/libs
-
+    - run: mkdir -p ~/repo/web/build
     - run: mv -v /tmp/workspace/web/* ~/repo/web/build
     - run: ls ~/repo/web/build
 
