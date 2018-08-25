@@ -4,15 +4,15 @@ jobs:
     docker:
     - image: circleci/openjdk:8-jdk
 
-    working_directory: ~/fourquad/api
+    working_directory: ~/repo
 
     environment:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
 
     steps:
-    - run: pwd
     - checkout
+    - run: cd api
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "build.gradle" }}
@@ -28,10 +28,10 @@ jobs:
     docker:
     - image: circleci/node:7.10
 
-    working_directory: ~/fourquad/web
+    working_directory: ~/repo
     steps:
-    - run: pwd
     - checkout
+    - run: cd web
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "package.json" }}
