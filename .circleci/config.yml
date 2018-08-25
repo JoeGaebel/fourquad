@@ -13,11 +13,11 @@ jobs:
         - v2-dependencies-{{ checksum "api/build.gradle" }}
         - v2-dependencies-
     - run: ./gradlew dependencies
+    - run: ./gradlew test
     - save_cache:
         paths:
         - ~/.gradle
         key: v2-dependencies-{{ checksum "api/build.gradle" }}
-    - run: ./gradlew test
 
   test-web:
     docker:
@@ -51,10 +51,6 @@ jobs:
         - v2-dependencies-{{ checksum "api/build.gradle" }}
         - v2-dependencies-
     - run: ./gradlew dependencies
-    - save_cache:
-        paths:
-        - ~/.gradle
-        key: v2-dependencies-{{ checksum "api/build.gradle" }}
     - run: ./gradlew assemble
     - run: mkdir -p /tmp/workspace/api
     - run: mv api/build/libs/* /tmp/workspace/api
@@ -62,6 +58,10 @@ jobs:
         root: /tmp/workspace
         paths:
         - api
+    - save_cache:
+        paths:
+        - ~/.gradle
+        key: v2-dependencies-{{ checksum "api/build.gradle" }}
 
 
   build-web:
