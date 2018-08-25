@@ -9,7 +9,7 @@ class App extends Component {
     componentWillMount() {
         fetch('/api/content').then((response) => {
           response.json().then(jsonBody => {
-              this.setState({content: jsonBody.content});
+              this.setState({content: jsonBody.text});
             });
         });
     }

@@ -5,7 +5,7 @@ import {shallow} from "enzyme";
 
 describe('App', () => {
     beforeEach(() => {
-        global.fetch.mockResponse(JSON.stringify({content: "from da server"}), {status: 200});
+        global.fetch.mockResponse(JSON.stringify({text: "from da server"}), {status: 200});
     });
 
     it('renders the content from the backend', (done) => {
