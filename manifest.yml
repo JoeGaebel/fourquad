@@ -1,13 +1,13 @@
 ---
 applications:
 - name: fourquad-api
-  memory: 128M
+  memory: 512M
   instances: 1
   path: api/build/libs/api-0.0.1-SNAPSHOT.jar
   buildpack: java_buildpack
 
 - name: fourquad-web
-  memory: 128M
+  memory: 512M
   instances: 1
   path: web/build
   buildpack: staticfile_buildpack
